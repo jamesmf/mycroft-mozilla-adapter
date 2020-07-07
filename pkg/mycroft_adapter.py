@@ -30,6 +30,7 @@ class MycroftAdapter(Adapter):
             return
 
         config = database.load_config()
+        print("asdf", config)
         database.close()
 
         if not config or "devicename" not in config:
