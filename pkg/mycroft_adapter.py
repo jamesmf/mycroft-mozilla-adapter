@@ -20,6 +20,7 @@ class MycroftAdapter(Adapter):
 
         self.pairing = False
         self.device_ip = None
+        self.device_ref = None
         self.start_pairing(_TIMEOUT)
 
     def _add_from_config(self):
@@ -58,7 +59,8 @@ class MycroftAdapter(Adapter):
         self._add_from_config()
         self.pairing = False
 
-        self.handle_device_added(self.device_ref)
+        if self.device_ref:
+            self.handle_device_added(self.device_ref)
 
     def cancel_pairing(self):
         """Cancel the pairing process."""
