@@ -16,7 +16,9 @@ class MycroftAdapter(Adapter):
         verbose -- whether or not to enable verbose logging
         """
         self.name = self.__class__.__name__
-        Adapter.__init__(self, "mycroft-adapter", "mycroft-adapter", verbose=verbose)
+        Adapter.__init__(
+            self, "mycroft-mozilla-adapter", "mycroft-mozilla-adapter", verbose=verbose
+        )
 
         self.pairing = False
         self.device_ip = None
