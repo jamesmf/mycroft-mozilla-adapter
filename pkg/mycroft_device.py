@@ -14,6 +14,7 @@ class MycroftDevice(Device):
         """
         Device.__init__(self, adapter, _id)
         self._type = ["OnOffSwitch"]
+        self.poll_interval = 5
 
         self.description = "Mycroft device"
         self.name = "mycroft"
@@ -27,3 +28,6 @@ class MycroftDevice(Device):
             "testproperty",
             {"@type": "TestCase", "title": "TestMe", "type": "string"},
         )
+
+        def poll(self):
+            time.sleep(self.poll_interval)
