@@ -27,7 +27,7 @@ class MycroftAdapter(Adapter):
 
     def _add_from_config(self):
         """Attempt to get the ip of the Mycroft."""
-        database = Database("mycroft-adapter")
+        database = Database("mycroft-mozilla-adapter")
         if not database.open():
             return
 
