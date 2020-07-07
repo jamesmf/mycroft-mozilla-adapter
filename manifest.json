@@ -1,0 +1,35 @@
+{
+  "author": "jamesmf",
+  "description": "Mycroft adapter plugin for Mozilla WebThings Gateway",
+  "gateway_specific_settings": {
+    "webthings": {
+      "exec": "python3 {path}/main.py",
+      "primary_type": "adapter",
+      "strict_max_version": "*",
+      "strict_min_version": "0.10.0"
+    }
+  },
+  "homepage_url": "https://github.com/jamesmf/mycroft-mozilla-adapter",
+  "id": "mycroft-mozilla-adapter",
+  "license": "MPL-2.0",
+  "manifest_version": 1,
+  "name": "Mycroft",
+  "options": {
+    "default": {
+      "devicename": "picroft"
+    },
+    "schema": {
+      "type": "object",
+      "required": [
+        "devicename"
+      ],
+      "properties": {
+        "devicename": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "short_name": "Mycroft",
+  "version": "0.1.0"
+}

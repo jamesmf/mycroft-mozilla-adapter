@@ -1,0 +1,56 @@
+{
+  "name": "mycroft-adapter",
+  "display_name": "Mycroft",
+  "version": "0.1.0",
+  "description": "Mycroft adapter plugin for Mozilla WebThings Gateway",
+  "author": "jamesmf",
+  "main": "main.py",
+  "keywords": [
+    "mozilla",
+    "iot",
+    "adapter",
+    "mycroft"
+  ],
+  "homepage": "https://github.com/jamesmf/mycroft-mozilla-adapter",
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jamesmf/mycroft-mozilla-adapter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jamesmf/mycroft-mozilla-adapter/issues"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "SHA256SUMS",
+    "lib",
+    "main.py",
+    "manifest.json",
+    "pkg/__init__.py",
+    "pkg/mycroft_adapter.py",
+    "pkg/mycroft_device.py"
+  ],
+  "moziot": {
+    "api": {
+      "min": 2,
+      "max": 2
+    },
+    "plugin": true,
+    "exec": "python3 {path}/main.py",
+    "config": {
+      "devicename": "picroft"
+    },
+    "schema": {
+      "type": "object",
+      "required": [
+        "devicename"
+      ],
+      "properties": {
+        "devicename": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
