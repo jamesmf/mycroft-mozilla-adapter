@@ -29,5 +29,5 @@ class MycroftDevice(Device):
             {"@type": "TestCase", "title": "TestMe", "type": "string"},
         )
 
-        def poll(self):
-            time.sleep(self.poll_interval)
+    def poll(self):
+        time.sleep(self.poll_interval)
