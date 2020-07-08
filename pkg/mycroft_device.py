@@ -50,10 +50,15 @@ class MycroftDevice(Device):
 
     def read(self):
         r = self.ws_reader.recv()
-        self.queue.append(r)
+        if r in self.message_types:
+            self.handle_message(r)
+            self.queue.append(r)
         if len(self.queue) > 100:
             self.queue = self.queue[:100]
 
     def format_message(self, type_, data):
         data = json.dumps(data)
         return "{" + self.msg_template.format(msg_type=type_, msg_data_str=data) + "}"
+
+    def handle_message(self, msg):
+        print(msg)
