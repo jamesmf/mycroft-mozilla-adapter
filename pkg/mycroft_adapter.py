@@ -40,14 +40,14 @@ class MycroftAdapter(Adapter):
 
         try:
             mycroft_device_name = config["devicename"]
-            print(mycroft_device_name)
+            monitored_message_types = config.get("monitored_message_types", [])
             mycroft_ip = socket.gethostbyname(mycroft_device_name)
-            self.device_ip = mycroft_ip
+            self.device_ref = MycroftDevice(
+                self, "mycroft-device", monitored_message_types, mycroft_ip
+            )
+
         except (OSError, UnboundLocalError, socket.gaierror) as e:
             print("Failed to connect to {}: {}".format(str(mycroft_device_name), e))
-
-        if self.device_ip:
-            self.device_ref = MycroftDevice(self, "mycroft-id123")
 
     def start_pairing(self, timeout):
         """

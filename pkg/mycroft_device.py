@@ -4,24 +4,35 @@ import time
 
 
 class MycroftDevice(Device):
-    """TP-Link smart plug type."""
+    """Mycroft Device"""
 
-    def __init__(self, adapter, _id):
+    msg_template = '{"type": "{msg_type}", "data": {msg_data_str}}'
+
+    def __init__(self, adapter, _id, device_ip):
         """
         Initialize the object.
         adapter -- the Adapter managing this device
-        _id -- ID of this device
+        _id -- ID of this device,
+        device_ip -- ip of the mycroft on your gateway's local network
         """
         Device.__init__(self, adapter, _id)
-        self._type = ["OnOffSwitch"]
-        self.poll_interval = 5
+        self._type = ["SmartSpeaker"]
+        self.message = self.format_message("mozilla-iot.initialized", {})
 
         self.description = "Mycroft device"
         self.name = "mycroft"
+        self.queue = []
 
-        t = threading.Thread(target=self.poll)
-        t.daemon = True
-        t.start()
+        self.ws_reader = websocket.create_connection(f"ws://{host}:8181/core")
+        self.ws_sender = websocket.create_connection(f"ws://{host}:8181/core")
+
+        send_thread = threading.Thread(target=self.send)
+        send_thread.daemon = True
+        send_thread.start()
+
+        read_thread = threading.Thread(target.self.read)
+        read_thread.daemon = True
+        read_thread.start()
 
         self.properties["testproperty"] = Property(
             self,
@@ -29,5 +40,17 @@ class MycroftDevice(Device):
             {"@type": "TestCase", "title": "TestMe", "type": "string"},
         )
 
-    def poll(self):
-        time.sleep(self.poll_interval)
+    def send(self):
+        if self.message is not None:
+            self.ws_sender.send(message)
+            self.message = None
+
+    def read(self):
+        r = self.ws_reader.recv()
+        self.queue.append(r)
+        if len(queue) > 100:
+            self.queue = self.queue[:100]
+
+    def format_message(type_, data):
+        data = json.dumps(data)
+        return self.msg_template.format(msg_type=type_, msg_data_str=data)

@@ -16,7 +16,14 @@
   "name": "Mycroft",
   "options": {
     "default": {
-      "devicename": "picroft"
+      "devicename": "picroft",
+      "token": "",
+      "monitored_message_types": [
+        "speak",
+        "recognizer_loop:utterance",
+        "mozilla-iot.command",
+        "mozilla-iot.initialized"
+      ]
     },
     "schema": {
       "type": "object",
@@ -26,10 +33,23 @@
       "properties": {
         "devicename": {
           "type": "string"
+        },
+        "token": {
+          "title": "Authorization Token",
+          "description": "Navigate to Settings -> Developer -> Create local authorization -> Allow. Then, copy the generated JSON Web Token into this field.",
+          "type": "string"
+        },
+        "monitored_message_types": {
+          "title": "Message types to log",
+          "description": "This skill connects to Mycroft's Messagebus, and can keep track of what's happening on the device. By adding more items here, the gateway can listen for more message types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
   },
   "short_name": "Mycroft",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
