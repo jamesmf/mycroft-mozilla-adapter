@@ -50,6 +50,7 @@ class MycroftDevice(Device):
 
     def read(self):
         r = self.ws_reader.recv()
+        print("received message!", r)
         if r in self.message_types:
             self.handle_message(r)
             self.queue.append(r)
