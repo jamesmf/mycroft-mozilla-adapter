@@ -44,18 +44,20 @@ class MycroftDevice(Device):
         )
 
     def send(self):
-        if self.message is not None:
-            self.ws_sender.send(self.message)
-            self.message = None
+        while True:
+            if self.message is not None:
+                self.ws_sender.send(self.message)
+                self.message = None
 
     def read(self):
-        r = self.ws_reader.recv()
-        print("received message!", r)
-        if r in self.message_types:
-            self.handle_message(r)
-            self.queue.append(r)
-        if len(self.queue) > 100:
-            self.queue = self.queue[:100]
+        while True:
+            r = self.ws_reader.recv()
+            print("received message!", r)
+            if r in self.message_types:
+                self.handle_message(r)
+                self.queue.append(r)
+            if len(self.queue) > 100:
+                self.queue = self.queue[:100]
 
     def format_message(self, type_, data):
         data = json.dumps(data)
