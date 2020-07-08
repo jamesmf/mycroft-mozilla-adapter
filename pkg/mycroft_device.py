@@ -8,7 +8,7 @@ import websocket
 class MycroftDevice(Device):
     """Mycroft Device"""
 
-    msg_template = '{"type": "{msg_type}", "data": {msg_data_str}}'
+    msg_template = '"type": "{msg_type}", "data": {msg_data_str}'
 
     def __init__(self, adapter, _id, message_types, device_ip):
         """
@@ -56,4 +56,4 @@ class MycroftDevice(Device):
 
     def format_message(self, type_, data):
         data = json.dumps(data)
-        return self.msg_template.format(msg_type=type_, msg_data_str=data)
+        return "{" + self.msg_template.format(msg_type=type_, msg_data_str=data) + "}"
